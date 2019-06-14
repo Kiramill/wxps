@@ -3,7 +3,8 @@ import browserSync from 'browser-sync';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import config from '../webpack.config';
+
+import config from '../webpack.config.dev';
 
 const compiler = webpack(config);
 
@@ -18,10 +19,7 @@ browserSync({
     middleware: [
 
       webpackDevMiddleware(compiler, {
-        // Dev middleware can't access config, so we provide publicPath
         publicPath: config.output.publicPath,
-
-        // These settings suppress noisy webpack output so only errors are displayed to the console.
         noInfo: true,
         quiet: false,
         stats: {
@@ -33,19 +31,14 @@ browserSync({
           chunks: false,
           chunkModules: false
         },
-
-        // for other settings see
-        // https://webpack.js.org/guides/development/#using-webpack-dev-middleware
       }),
 
-      // bundler should be the same as above
       webpackHotMiddleware(compiler)
     ]
   },
 
-  // no need to watch '*.js' here, webpack will take care of it for us,
-  // including full page reloads if HMR won't work
   files: [
-    'src/*.html'
+    'src/*.pug',
+    'src/*.scss'
   ]
 });

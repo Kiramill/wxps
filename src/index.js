@@ -1,4 +1,14 @@
 
-// import style from './style.scss';
+import style from './style.scss';
 
-console.log('Hello');
+
+class ClassName {
+    constructosr() {
+        const as = 'asdd';asdsdasd
+        sadsda
+
+    }
+}
+
+new ClassName();
+console.log('Hello sad');
